@@ -1,0 +1,20 @@
+{
+  "name": "nextjs-webpage",
+  "version": "1.0.0",
+  "description": "This is my first attempt at creating a Webpage from scratch using NextJS",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^15.1.5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
