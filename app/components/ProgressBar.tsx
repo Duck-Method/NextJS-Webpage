@@ -18,8 +18,8 @@ export default function ProgressBar({
   const offset = circumference - progress * circumference;
 
   return (
-    <div>
-      <svg width={size} height={size} >
+    <div className="relative flex items-center justify-center">
+      <svg width={size} height={size} className="transform -rotate-90">
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -42,8 +42,8 @@ export default function ProgressBar({
           transition={{ duration: 0.5, ease: 'easeInOut' }}
         />
       </svg>
-      <div>
-        <span>
+      <div className="absolute text-center">
+        <span className="text-xl font-bold">
           {Math.round(progress * 100)}%
         </span>
       </div>

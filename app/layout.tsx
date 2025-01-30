@@ -1,20 +1,22 @@
 // app/layout.tsx
 import './styles/global.css';
-import {ReactNode} from 'react';
+import { ReactNode } from 'react';
 
-export const metedata = {
-    title: 'Focus Timer',
-    descripiton: 'A fosuc timer app with customizable timers and ambient sounds',
+export const metadata = {
+  title: 'Focus Timer',
+  description: 'A focus timer app with customizable timers and ambient sounds.',
 };
 
 interface RootLayoutProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-    return (
-        <html lang="en">
-            <body>{children}</body>
-        </html>
-    );
+  return (
+    <html lang="en">
+      <body className="bg-gray-100 text-gray-900">
+        {children}
+      </body>
+    </html>
+  );
 }

@@ -1,1 +1,4 @@
-/* this is the global styles for the application. Root changes and global variables should go here. */
+/* app/styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
