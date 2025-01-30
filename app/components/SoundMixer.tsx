@@ -1,7 +1,7 @@
 // app/components/SoundMixer.tsx
 'use client'; // Mark as a Client Component
-import { useState, useEffect } from 'react';
-import { Howl, Howler } from 'howler';
+import { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
+import { Howl } from 'howler';
 
 //define the sound types
 type SoundType = 'rain' | 'cafe' | 'fireplace' | 'whiteNoise';
@@ -14,7 +14,18 @@ const soundUrls: Record<SoundType, string> = {
     whiteNoise: '/sounds/white-noise.mp3'
 };
 
-export default function SoundMixer() {
+//define the ref type
+export type SoundMixerHandle = {
+    fadeOutSounds: () => void;
+};
+
+//sound played upon timer reaching 0
+const completionSound = new Howl({
+src: ['/sounds/chime.mp3'],
+volume: 0.5,
+});
+
+const SoundMixer = forwardRef<SoundMixerHandle>((props, ref) => {
     //state for volume levels
     const [volumes, setVolumes] = useState<Record<SoundType, number>>({
         rain: 0.5,
@@ -63,7 +74,7 @@ export default function SoundMixer() {
         if (sound) {
             sound.volume(volume);
         }
-        setVolumes((prev) => ({...prev, [soundType]: volume }));
+        setVolumes((prev) => ({...prev, [soundType]: volume })); //update state
     };
 
     // Toggle play/pause for a specific sound
@@ -81,9 +92,37 @@ export default function SoundMixer() {
     // Toggle mute for all sounds
     const toggleMute = () => {
         const newMuteState = !isMuted;
-        Howler.mute(newMuteState);
+        Object.values(sounds).forEach((sound) =>{
+            if (sound) {
+                sound.mute(newMuteState); // mute/unmute individual sounds
+            }
+        });
         setIsMuted(newMuteState);
     };
+
+    //function to fade out all sounds and restore volumes
+    const fadeOutSounds = () => {
+        const fadeDuration = 3000; // 3 seconds
+
+        Object.entries(sounds).forEach(([key, sound]) => {
+            const soundType = key as SoundType;
+            if (sound) {
+                sound.fade(sound.volume(), 0, fadeDuration);
+
+                //after fade-out, stop the sound and restore its volume
+                setTimeout(() => {
+                    sound.stop();
+                    completionSound.play();
+                    sound.volume(volumes[soundType]); //restore user-set volume
+                }, fadeDuration);
+            }
+        });
+    };
+
+    // expose the fadeout function via ref
+    useImperativeHandle(ref, () => ({
+        fadeOutSounds
+    }));
 
     return (
         <div className="space-y-4">
@@ -102,26 +141,28 @@ export default function SoundMixer() {
                     <label className="block text-sm font-medium">
                     {soundType.charAt(0).toUpperCase() + soundType.slice(1)}
                     </label>
-                <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.1"
-                    value={volumes[soundType]}
-                    onChange={(e) =>
-                    handleVolumeChange(soundType, parseFloat(e.target.value))
-                    }
-                    className="w-full"
-                />
-                <button
-                    onClick={() => toggleSound(soundType)}
-                    className="px-4 py-2 bg-blue-500 text-white rounded"
-                >
-                    {sounds[soundType]?.playing() ? 'Pause' : 'Play'}
-                </button>
-                </div>
+                    <input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.1"
+                        value={volumes[soundType]}
+                        onChange={(e) =>
+                        handleVolumeChange(soundType, parseFloat(e.target.value))
+                        }
+                        className="w-full"
+                    />
+                    <button
+                        onClick={() => toggleSound(soundType)}
+                        className="px-4 py-2 bg-blue-500 text-white rounded"
+                    >
+                        {sounds[soundType]?.playing() ? 'Pause' : 'Play'}
+                    </button>
+                    </div>
             );
             })}
         </div>
     );
-}
+});
+
+export default SoundMixer;

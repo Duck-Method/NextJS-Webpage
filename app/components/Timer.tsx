@@ -3,20 +3,28 @@
 import { useState, useEffect } from 'react';
 import ProgressBar from './ProgressBar';
 
-export default function Timer() {
+interface TimerProps {
+    onTimerEnd: () => void; //callback to notify when the timer ends
+}
+
+export default function Timer({ onTimerEnd }: TimerProps) {
   const [time, setTime] = useState<number>(25 * 60); // 25 minutes in seconds
   const [isActive, setIsActive] = useState<boolean>(false);
 
+
   useEffect(() => {
     let interval: NodeJS.Timeout;
+
     if (isActive && time > 0) {
       interval = setInterval(() => setTime((prev) => prev - 1), 1000);
     } else if (time === 0) {
       clearInterval(interval);
-      // Trigger timer end logic (e.g., play a sound)
+      onTimerEnd(); //fade out sounds when timer reaches zero
     }
+
     return () => clearInterval(interval);
   }, [isActive, time]);
+  
 
   const progress = 1 -time / (25 * 60); // Calculate progress (0 to 1)
   
