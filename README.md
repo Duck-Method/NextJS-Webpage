@@ -7,3 +7,6 @@ I decided to create a simple [pomodoro](https://en.wikipedia.org/wiki/Pomodoro_T
 ## Technologies
 I used NextJS, TypeScript, very basic CSS, sound effects from [pixabay](https://pixabay.com/sound-effects/), [Howler](https://www.npmjs.com/package/react-howler) to handle the sounds being played, and [framer-motion](https://www.npmjs.com/package/framer-motion) for the animation of the timer.
 
+## Deployment
+You can download the files and run them locally by folloowing the commands in the package manager.
+I also deployed the service on Render: https://nextjs-webpage-hlm5.onrender.com
