@@ -1,4 +1,62 @@
 /* app/global.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+body {
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    margin: 10;
+    padding: 200;
+    background-color: #f0f0f0;
+}
+
+main {
+    width: 50vw;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+}
+
+button {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.35rem;
+    cursor: pointer;
+    width: 7rem;
+    background-color: rgb(196, 194, 194);
+}
+
+.circle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sliders {
+    width: 100%;
+    margin: 0.35rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left {
+padding: 0.5rem;
+width: 5rem;
+}
+
+.center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}

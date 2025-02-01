@@ -37,27 +37,27 @@ export default function Timer({ onTimerEnd }: TimerProps) {
   };
 
   return (
-    <div className="text-center">
+    <div className="">
         <ProgressBar progress={progress} size={150} strokeWidth={12} />
-      <div className="text-2xl font-bold mb-4">
+      <div className="center">
         {Math.floor(time / 60)}:{String(time % 60).padStart(2, '0')}
       </div>
-      <div className="space-x-4">
+      <div className="center">
         <button
           onClick={startTimer}
-          className="px-4 py-2 bg-blue-500 text-white rounded"
+          className=""
         >
           Start
         </button>
         <button
           onClick={pauseTimer}
-          className="px-4 py-2 bg-yellow-500 text-white rounded"
+          className=""
         >
           Pause
         </button>
         <button
           onClick={resetTimer}
-          className="px-4 py-2 bg-red-500 text-white rounded"
+          className=""
         >
           Reset
         </button>

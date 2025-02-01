@@ -135,20 +135,20 @@ const SoundMixer = forwardRef<SoundMixerHandle>((props, ref) => {
     }));
 
     return (
-        <div className="space-y-4">
-            <h2 className="text-xl font-semibold mb-4">Ambient Sounds</h2>
+        <div className="circle">
+            <h2 className="">Ambient Sounds</h2>
             {/* Global mute for all sounds */}
             <button
                 onClick={toggleMute}
-                className="px-4 py-2 bg-gray-500 text-white rounded">{isMuted ? 'Unmute All' : 'Mute All'}
+                className="">{isMuted ? 'Unmute All' : 'Mute All'}
             </button>
 
             {/* Volume controls for each sound */}
             {Object.keys(soundUrls).map((key) => {
             const soundType = key as SoundType;
                 return (
-                    <div key={soundType} className="space-y-2">
-                    <label className="block text-sm font-medium">
+                    <div key={soundType} className="sliders">
+                    <label className="left">
                     {soundType.charAt(0).toUpperCase() + soundType.slice(1)}
                     </label>
                     <input
@@ -160,7 +160,7 @@ const SoundMixer = forwardRef<SoundMixerHandle>((props, ref) => {
                         onChange={(e) =>
                         handleVolumeChange(soundType, parseFloat(e.target.value))
                         }
-                        className="w-full"
+                        className="center"
                     />
                     <button
                         onClick={() => toggleSound(soundType)}
