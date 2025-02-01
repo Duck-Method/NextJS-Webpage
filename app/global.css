@@ -2,19 +2,20 @@
 body {
     display: flex;
     justify-content: center;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Cambria', sans-serif;
     margin: 10;
     padding: 200;
     background-color: #f0f0f0;
 }
 
 main {
-    width: 50vw;
+    width: 40vw;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
     text-align: center;
+    padding-top: 1.5rem;
 }
 
 label {
@@ -22,15 +23,20 @@ label {
 }
 
 button {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Cambria', sans-serif;
     font-weight: bold;
     font-size: 1rem;
     padding: 0.5rem 1rem;
-    border: none;
+    border: solid #3b82f6 0.1rem;
     border-radius: 0.35rem;
     cursor: pointer;
-    width: 7rem;
-    background-color: rgb(196, 194, 194);
+    width: 6rem;
+    background-color: rgb(212, 212, 212);
+}
+
+button:hover {
+    box-shadow: 1px 1px 15px 0px #3b82f6 inset;
+
 }
 
 .circle {
@@ -55,8 +61,16 @@ width: 5rem;
 }
 
 .center {
+    margin: 0.5rem;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+    text-shadow: 0px 0px 8px #3b82f6;
 }

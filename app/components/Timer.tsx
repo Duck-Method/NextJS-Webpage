@@ -8,7 +8,7 @@ interface TimerProps {
 }
 
 export default function Timer({ onTimerEnd }: TimerProps) {
-  const [time, setTime] = useState<number>(1 * 60); // 25 minutes in seconds
+  const [time, setTime] = useState<number>(25 * 60); // 25 minutes in seconds
   const [isActive, setIsActive] = useState<boolean>(false);
 
 
@@ -39,7 +39,7 @@ export default function Timer({ onTimerEnd }: TimerProps) {
   return (
     <div className="">
         <ProgressBar progress={progress} size={150} strokeWidth={12} />
-      <div className="center">
+      <div className="countdown">
         {Math.floor(time / 60)}:{String(time % 60).padStart(2, '0')}
       </div>
       <div className="center">
