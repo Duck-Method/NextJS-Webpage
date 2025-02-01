@@ -8,7 +8,7 @@ interface TimerProps {
 }
 
 export default function Timer({ onTimerEnd }: TimerProps) {
-  const [time, setTime] = useState<number>(25 * 60); // 25 minutes in seconds
+  const [time, setTime] = useState<number>(1 * 60); // 25 minutes in seconds
   const [isActive, setIsActive] = useState<boolean>(false);
 
 

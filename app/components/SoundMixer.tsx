@@ -42,6 +42,13 @@ const SoundMixer = forwardRef<SoundMixerHandle>((props, ref) => {
         whiteNoise:null,
     });
 
+    const [isPlayingMap, setIsPlayingMap] = useState<Record<SoundType, boolean>>({
+        rain: false,
+        cafe: false,
+        fireplace: false,
+        whiteNoise: false,
+    });
+
     const [isMuted, setIsMuted] = useState<boolean>(false);
 
     //initialize sounds on component mount
@@ -83,8 +90,10 @@ const SoundMixer = forwardRef<SoundMixerHandle>((props, ref) => {
         if (sound) {
             if (sound.playing()) {
                 sound.pause();
+                setIsPlayingMap((prev) => ({...prev, [soundType]: false})); //this line of code updates the satate to render the change in the browser
             } else {
                 sound.play();
+                setIsPlayingMap((prev) => ({...prev, [soundType]: true}));
             }
         }
     };
@@ -112,6 +121,7 @@ const SoundMixer = forwardRef<SoundMixerHandle>((props, ref) => {
                 //after fade-out, stop the sound and restore its volume
                 setTimeout(() => {
                     sound.stop();
+                    setIsPlayingMap((prev) => ({...prev, [soundType]: false}));
                     completionSound.play();
                     sound.volume(volumes[soundType]); //restore user-set volume
                 }, fadeDuration);
